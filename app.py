@@ -67,7 +67,7 @@ def form_post():
 	for i in range(len(images)):
 		images[i] = images[i].convert("RGB")
 
-	imageio.mimsave(os.path.join(path,'movieWorking.mp4'), images, fps=0.5)
+	imageio.mimsave(os.path.join(path,'movieWorking.mp4'), images, fps=0.1)
 
 	language = 'en'
 	
@@ -81,8 +81,8 @@ def form_post():
 	movie_clip = mpe.VideoFileClip(movie_path)
 	audio_clip = mpe.AudioFileClip(audio_path)
 	final_clip = movie_clip.set_audio(audio_clip)
-	final_clip.write_videofile("finalVid.mp4")
-	return render_template("result.html", prompt=user_input, video="C:/Users/miera/Desktop/cs338/TED-on-Demand/finalVid.mp4")
+	final_clip.write_videofile("./static/finalVid.mp4")
+	return render_template("result.html")
 	# return redirect("C:/Users/miera/Desktop/cs338/TED-on-Demand/finalVid.mp4")
 
 @app.route("/loading")  
