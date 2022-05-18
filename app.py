@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for
 
 from nltk.corpus import stopwords
 from icrawler.builtin import GoogleImageCrawler
@@ -24,9 +24,8 @@ def home():
 @app.route('/', methods = ['POST'])
 def form_post():
 	user_input = request.form['promptInput']
-	print("user input:", user_input)
-	# processing
 	
+	# start of processing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	dir = 'C:/Users/miera/Desktop/cs338/TED-on-Demand/images'
 	filelist = glob.glob(os.path.join(dir, "*"))
 	for f in filelist:
@@ -41,6 +40,7 @@ def form_post():
 	
 	sentences = tokenizer.tokenize(wiki_result)
 	print("sentence:", sentences[0])
+	count = 0
 	for sentence in sentences:
 		sentence = " ".join([word for word in sentence.split() if word not in stopwords_dict])
 		filters = dict(
@@ -48,6 +48,30 @@ def form_post():
 			)
 		google_Crawler = GoogleImageCrawler(storage = {'root_dir': 'images'})
 		google_Crawler.crawl(filters = filters,keyword = sentence, max_num = 10)
+		"""
+		trying to fix image naming issue
+		file_path = 'C:/Users/miera/Desktop/cs338/TED-on-Demand/images/0000'
+		final_file_paths = []
+		for i in range(1,11):
+			if i!=10:
+				final_file_path = file_path + '0' + str(i) + '.jpg'
+			else:
+				final_file_path = file_path + str(i) + '.jpg'
+			final_file_paths.append(final_file_path)
+		for i in range(len(final_file_paths)):
+			try:
+				new_name = final_file_paths[i][:-5] + str(count) + '.jpg'
+				print('NEW NAME IS: ',new_name)
+				count+=1
+				os.rename(final_file_paths[i], new_name)
+
+			except:
+				new_name = final_file_paths[i][:-5] + str(count) + '.png'
+				print('png old name',final_file_paths[i] )
+				print('png NEW NAME IS: ',new_name)
+				count+=1
+				os.rename(final_file_paths[i][:-3]+'png', new_name)
+		"""	
 
 	path = 'images'
 
@@ -82,9 +106,5 @@ def form_post():
 	audio_clip = mpe.AudioFileClip(audio_path)
 	final_clip = movie_clip.set_audio(audio_clip)
 	final_clip.write_videofile("./static/finalVid.mp4")
-	return render_template("result.html")
-	# return redirect("C:/Users/miera/Desktop/cs338/TED-on-Demand/finalVid.mp4")
 
-@app.route("/loading")  
-def loading():
-	return render_template("loading.html") 
+	return render_template("result.html")

@@ -34,18 +34,32 @@
         </nav>
         <!-- Masthead-->
         <header class="masthead">
-            <div class="container px-4 px-lg-5 h-100">
+            <div id='main' class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-8 align-self-end">
                         <h1 class="text-white font-weight-bold">Type in your prompt to generate a TED talk</h1>
                         <hr class="divider" />
                     </div>
-                    <Form method="POST" class="col-lg-8 align-self-baseline">
+                    <Form method="POST" class="col-lg-8 align-self-baseline" onsubmit="myfunction()" >
                         <input class="form-control mr-sm-2 mt-4 mb-4" type="search" name="promptInput" placeholder="prompt goes here" aria-label="Search">
                         <button type="submit" class="btn btn-primary btn-xl">Create Video</Button>
+                        
                     </Form>
+                    
                 </div>
             </div>
+            <div id="loading" style="display:none" class="container px-4 px-lg-5 h-100">
+                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                  <img id='gif' src="./static/loading.gif" alt="loading">
+                </div>
+              </div>
+            <script>
+                function myfunction(){
+                    document.getElementById('loading').style.display = "inline";
+                    document.getElementById('main').style.display = "none";
+                    window.location.replace('localhost:5000/loading');
+                }
+            </script>
         </header>
         <!-- About-->
         <section class="page-section bg-primary" id="about">
