@@ -40,11 +40,13 @@
                         <h1 class="text-white font-weight-bold">Type in your prompt to generate a TED talk</h1>
                         <hr class="divider" />
                     </div>
-                    <Form method="POST" class="col-lg-8 align-self-baseline" onsubmit="myfunction()" >
-                        <input class="form-control mr-sm-2 mt-4 mb-4" type="search" name="promptInput" placeholder="prompt goes here" aria-label="Search">
-                        <button type="submit" class="btn btn-primary btn-xl">Create Video</Button>
-                        
-                    </Form>
+
+                        <Form method="POST" class="col-lg-8 align-self-baseline" onsubmit="myfunction()" >
+                            <input class="form-control mr-sm-2 mt-4 mb-4" type="search" name="promptInput" placeholder="prompt goes here" aria-label="Search">
+                            <button type="submit" class="btn btn-primary btn-xl" formaction="/wiki_result">Create Video (Wiki)</Button>
+                            <button type="submit" class="btn btn-primary btn-xl" formaction="/nlp_result">Create Video (NLP)</Button>
+                            
+                        </Form>
                     
                 </div>
             </div>

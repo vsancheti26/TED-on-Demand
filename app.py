@@ -21,7 +21,7 @@ if __name__ == '__main__':
 def home():
 	return render_template("index.html") 
 
-@app.route('/', methods = ['POST'])
+@app.route('/wiki_result', methods = ['POST'])
 def form_post():
 	user_input = request.form['promptInput']
 	
@@ -113,4 +113,9 @@ def form_post():
 	final_clip = movie_clip.set_audio(audio_clip)
 	final_clip.write_videofile("./static/finalVid.mp4")
 
+	return render_template("result.html")
+
+@app.route('/nlp_result', methods = ['POST'])
+def nlp_form_post():
+	# do processing here
 	return render_template("result.html")
