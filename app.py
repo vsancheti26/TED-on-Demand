@@ -47,13 +47,13 @@ def form_post():
 			type='photo'
 			)
 		google_Crawler = GoogleImageCrawler(storage = {'root_dir': 'images'})
-		google_Crawler.crawl(filters = filters,keyword = sentence, max_num = 5)
+		google_Crawler.crawl(filters = filters,keyword = sentence, max_num = 3)
 		
 		# trying to fix image naming issue
 		# select newly added imgs
 		file_path = 'C:/Users/miera/Desktop/cs338/TED-on-Demand/images/0000'
 		final_file_paths = []
-		for i in range(1,6):
+		for i in range(1,4):
 			if i!=10:
 				final_file_path = file_path + '0' + str(i) + '.jpg'
 			else:
@@ -90,14 +90,18 @@ def form_post():
 			filenames.append(os.path.join(path, filename))
 
 	filenames.sort() 
+	images = []
 	for filename in filenames:
-		print('filename',filename, imageio.imread(filename))
-	images = list(map(lambda filename: Image.fromarray(imageio.imread(filename)).resize((512, 512)), filenames))
+		result = resizeImgs(filename)
+		if result:
+			images.append(result)
+	
 
 	for i in range(len(images)):
+		
 		images[i] = images[i].convert("RGB")
 
-	imageio.mimsave(os.path.join(path,'movieWorking.mp4'), images, fps=0.1)
+	imageio.mimsave(os.path.join(path,'movieWorking.mp4'), images, fps=0.2)
 
 	language = 'en'
 	
@@ -113,7 +117,15 @@ def form_post():
 	final_clip = movie_clip.set_audio(audio_clip)
 	final_clip.write_videofile("./static/finalVid.mp4")
 
-	return render_template("result.html")
+	return render_template("result.html", prompt=prompt)
+
+
+def resizeImgs(filename):
+	try:
+		return Image.fromarray(imageio.imread(filename)).resize((512, 512))
+	except:
+		print('issues w/ this file', filename)
+		return
 
 @app.route('/nlp_result', methods = ['POST'])
 def nlp_form_post():
