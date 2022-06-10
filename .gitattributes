@@ -1,2 +1,13 @@
 /Intro_Model filter=lfs diff=lfs merge=lfs -text
 Intro_Model/config.json filter=lfs diff=lfs merge=lfs -text
+Intro_Model/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
+Intro_Model/special_tokens_map.json filter=lfs diff=lfs merge=lfs -text
+Intro_Model/spiece.model filter=lfs diff=lfs merge=lfs -text
+Intro_Model/tokenizer_config.json filter=lfs diff=lfs merge=lfs -text
+Intro_Model/tokenizer.json filter=lfs diff=lfs merge=lfs -text
+Outro_Model/tokenizer.json filter=lfs diff=lfs merge=lfs -text
+Outro_Model/tokenizer_config.json filter=lfs diff=lfs merge=lfs -text
+Outro_Model/spiece.model filter=lfs diff=lfs merge=lfs -text
+Outro_Model/special_tokens_map.json filter=lfs diff=lfs merge=lfs -text
+Outro_Model/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
+Outro_Model/config.json filter=lfs diff=lfs merge=lfs -text
