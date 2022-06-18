@@ -1,6 +1,6 @@
-Goal: Our goal is to develop a software solution that, given a user generated prompt,
-produces infotainment-type content. The idea is that upon receiving a prompt, the
+Goal: Our goal is to develop a software solution that, given a user generated prompt, produces infotainment-type content. The idea is that upon receiving a prompt, the
 software will produce a video of educational value on the topic (image and audio).
+
 Approach:
 ● Build a front end for the user to interact with our website (flask).
 ● Prompt from our user for a subject for the TED talk.
